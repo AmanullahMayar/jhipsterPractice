@@ -1,0 +1,22 @@
+
+entity Company{
+    CompanyName String required unique
+    CompanyAddress String required 
+    CompanyDescription String
+    CreateDate  Instant
+}
+
+entity Customer{
+ FirstName   String 
+ LastName    String
+ Contact     String
+ Address     String
+ CreateDate  Instant
+}
+
+relationship ManyToOne{
+ Customer {Company(id) required} to Company
+}
+
+filter *
+paginate * with pagination

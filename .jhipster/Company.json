@@ -1,0 +1,32 @@
+{
+  "annotations": {
+    "changelogDate": "20240523120813"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "companyName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique"]
+    },
+    {
+      "fieldName": "companyAddress",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "companyDescription",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "createDate",
+      "fieldType": "Instant"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "name": "Company",
+  "pagination": "pagination",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

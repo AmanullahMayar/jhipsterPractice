@@ -1,0 +1,43 @@
+{
+  "annotations": {
+    "changelogDate": "20240523120814"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "firstName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "lastName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "contact",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "address",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "createDate",
+      "fieldType": "Instant"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "name": "Customer",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityField": "id",
+      "otherEntityName": "company",
+      "relationshipName": "company",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}
