@@ -3,29 +3,37 @@ import { Link, useParams } from 'react-router-dom';
 import { Button, Row, Col } from 'reactstrap';
 import { Translate, TextFormat } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import QRCode from 'qrcode.react';
-import { APP_DATE_FORMAT, APP_LOCAL_DATE_FORMAT } from 'app/config/constants';
+import { Buffer } from 'buffer';
+import { APP_DATE_FORMAT } from 'app/config/constants';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
-
 import { getEntity } from './customer.reducer';
 import axios from 'axios';
+
+const QRCodeDivStyle = {
+  border: '1px solid black',
+  padding: '15px',
+  margin: '130px',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+};
 
 export const CustomerDetail = () => {
   const dispatch = useAppDispatch();
   const { id } = useParams<'id'>();
 
-  const [qrCodeData, setQrCodeData] = useState(null);
+  const [qrCodeData, setQrCodeData] = useState('');
   useEffect(() => {
     const getQrCodeData = async () => {
       const apiUrl = 'api/customers/customer';
       const requestUrl = `${apiUrl}/${id}`;
-      const qrCodeDataResponse = await axios.get(requestUrl);
-      setQrCodeData(qrCodeDataResponse?.data);
+      const qrCodeDataResponse = await axios.get(requestUrl, { responseType: 'arraybuffer' });
+      const base64Image = Buffer.from(qrCodeDataResponse.data, 'binary').toString('base64');
+      const imageDataUrl = `data:image/png;base64,${base64Image}`;
+      setQrCodeData(imageDataUrl);
     };
     getQrCodeData();
   }, [id]);
-
-  console.log(qrCodeData);
 
   useEffect(() => {
     dispatch(getEntity(id));
@@ -35,7 +43,8 @@ export const CustomerDetail = () => {
 
   return (
     <Row className="justify-content-center">
-      <Col md="6">
+      <Col md="3"></Col>
+      <Col md="3">
         <h2 data-cy="customerDetailsHeading">
           <Translate contentKey="testprojectApp.customer.detail.title">Customer</Translate>
         </h2>
@@ -97,6 +106,10 @@ export const CustomerDetail = () => {
           </span>
         </Button>
       </Col>
+      <Col md="4">
+        <div style={QRCodeDivStyle}>{qrCodeData && <img src={qrCodeData} alt="QR Code" />}</div>
+      </Col>
+      <Col md="2"></Col>
     </Row>
   );
 };
