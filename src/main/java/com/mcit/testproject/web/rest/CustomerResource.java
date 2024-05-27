@@ -8,6 +8,7 @@ import com.mcit.testproject.service.criteria.CustomerCriteria;
 import com.mcit.testproject.web.rest.errors.BadRequestAlertException;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -15,10 +16,12 @@ import java.util.Objects;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -34,7 +37,6 @@ import tech.jhipster.web.util.ResponseUtil;
 public class CustomerResource {
 
     private final Logger log = LoggerFactory.getLogger(CustomerResource.class);
-
     private static final String ENTITY_NAME = "customer";
 
     @Value("${jhipster.clientApp.name}")
@@ -46,14 +48,18 @@ public class CustomerResource {
 
     private final CustomerQueryService customerQueryService;
 
+    private final QRCodeGenerator qrCodeGenerator;
+
     public CustomerResource(
         CustomerService customerService,
         CustomerRepository customerRepository,
-        CustomerQueryService customerQueryService
+        CustomerQueryService customerQueryService,
+        QRCodeGenerator qrCodeGenerator
     ) {
         this.customerService = customerService;
         this.customerRepository = customerRepository;
         this.customerQueryService = customerQueryService;
+        this.qrCodeGenerator = qrCodeGenerator;
     }
 
     /**
@@ -201,5 +207,25 @@ public class CustomerResource {
         return ResponseEntity.noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
             .build();
+    }
+
+    // API for generating QRCode for customer data according id
+    @GetMapping(value = "/customer/{id}", produces = MediaType.IMAGE_PNG_VALUE)
+    public byte[] getQRCodeByCustomerId(@PathVariable("id") Long id) throws IOException {
+        Optional<Customer> customer = customerService.findOne(id);
+        String customerDetails =
+            "ID: " +
+            customer.get().getId() +
+            "\n" +
+            "FirstName: " +
+            customer.get().getFirstName() +
+            "\n" +
+            "LastName: " +
+            customer.get().getLastName();
+        if (customer.isPresent()) {
+            return qrCodeGenerator.generateQRCode(customerDetails);
+        } else {
+            throw new IOException("Not found record");
+        }
     }
 }

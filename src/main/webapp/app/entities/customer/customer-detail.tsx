@@ -1,27 +1,41 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Button, Row, Col } from 'reactstrap';
 import { Translate, TextFormat } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
+import QRCode from 'qrcode.react';
 import { APP_DATE_FORMAT, APP_LOCAL_DATE_FORMAT } from 'app/config/constants';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 
 import { getEntity } from './customer.reducer';
+import axios from 'axios';
 
 export const CustomerDetail = () => {
   const dispatch = useAppDispatch();
-
   const { id } = useParams<'id'>();
+
+  const [qrCodeData, setQrCodeData] = useState(null);
+  useEffect(() => {
+    const getQrCodeData = async () => {
+      const apiUrl = 'api/customers/customer';
+      const requestUrl = `${apiUrl}/${id}`;
+      const qrCodeDataResponse = await axios.get(requestUrl);
+      setQrCodeData(qrCodeDataResponse?.data);
+    };
+    getQrCodeData();
+  }, [id]);
+
+  console.log(qrCodeData);
 
   useEffect(() => {
     dispatch(getEntity(id));
   }, []);
 
   const customerEntity = useAppSelector(state => state.customer.entity);
+
   return (
-    <Row>
-      <Col md="8">
+    <Row className="justify-content-center">
+      <Col md="6">
         <h2 data-cy="customerDetailsHeading">
           <Translate contentKey="testprojectApp.customer.detail.title">Customer</Translate>
         </h2>
