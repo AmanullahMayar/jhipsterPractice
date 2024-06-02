@@ -39,6 +39,8 @@ const CustomerQRCodeReader: React.FC = () => {
         setId(match[1]);
         setFirstName(match[2]);
         setLastName(match[3]);
+      } else {
+        setCustomerVerificationText('Not Valid QR Code data');
       }
     };
     const qrCodeErrorCallback = error => {
