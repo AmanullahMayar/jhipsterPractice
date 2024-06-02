@@ -4,13 +4,42 @@ import { Button, Row, Col } from 'reactstrap';
 import { Translate } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Html5Qrcode, Html5QrcodeSupportedFormats } from 'html5-qrcode';
+import axios from 'axios';
+
+const CustomerPattern = /ID:\s*(\d+)\s+FirstName:\s*(.+?)\s+LastName:\s*(.+)/;
 
 const CustomerQRCodeReader: React.FC = () => {
-  const [scanResult, setScanResult] = useState(null);
-
+  const [customerVerificationText, setCustomerVerificationText] = useState('');
+  const [id, setId] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  useEffect(() => {
+    if (id.length > 0) {
+      const getCustomerData = async () => {
+        const apiUrl = 'api/customers';
+        const requestUrl = `${apiUrl}/${id}`;
+        try {
+          const response = await axios.get(requestUrl);
+          if (response.data.id.toString() === id && response.data.firstName === firstName && response.data.lastName === lastName) {
+            setCustomerVerificationText('Customer Verified Successfully');
+          } else {
+            setCustomerVerificationText('Not Valid QR Code data');
+          }
+        } catch (error) {
+          setCustomerVerificationText('No Data Found For Provided QRCode');
+        }
+      };
+      getCustomerData();
+    }
+  }, [id]);
   useEffect(() => {
     const qrCodeSuccessCallback = (decodedText, decodedResult) => {
-      setScanResult(decodedText);
+      const match = decodedText.match(CustomerPattern);
+      if (match) {
+        setId(match[1]);
+        setFirstName(match[2]);
+        setLastName(match[3]);
+      }
     };
     const qrCodeErrorCallback = error => {
       console.error('QR Code error:', error);
@@ -41,11 +70,14 @@ const CustomerQRCodeReader: React.FC = () => {
           <div id="reader"></div>
           <br />
           <h4>Scan Result:&nbsp;</h4>
-          {scanResult && (
+          {id && firstName && (
             <div>
-              <p>{scanResult}</p>
+              <p>{'ID: ' + id + ', First Name: ' + firstName + ', Last Name: ' + lastName}</p>
             </div>
           )}
+          <div>
+            <h3 style={{ color: 'red', fontSize: '24px', fontWeight: 'bold' }}>{customerVerificationText}</h3>
+          </div>
           <Button tag={Link} id="cancel-save" data-cy="entityCreateCancelButton" to="/customer" replace color="info">
             <FontAwesomeIcon icon="arrow-left" />
             &nbsp;
