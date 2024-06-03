@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Button, Row, Col } from 'reactstrap';
-import { Translate } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Html5Qrcode, Html5QrcodeSupportedFormats } from 'html5-qrcode';
 import axios from 'axios';
+import { Html5Qrcode, Html5QrcodeSupportedFormats } from 'html5-qrcode';
+import React, { useEffect, useState } from 'react';
+import { Translate } from 'react-jhipster';
+import { Link } from 'react-router-dom';
+import { Button, Col, Row } from 'reactstrap';
 
 const CustomerPattern = /ID:\s*(\d+)\s+FirstName:\s*(.+?)\s+LastName:\s*(.+)/;
 
@@ -47,6 +47,7 @@ const CustomerQRCodeReader: React.FC = () => {
       console.error('QR Code error:', error);
     };
     const html5QrCode = new Html5Qrcode('reader', {
+      verbose: true, // Add the verbose property
       formatsToSupport: [Html5QrcodeSupportedFormats.QR_CODE],
     });
     const config = {

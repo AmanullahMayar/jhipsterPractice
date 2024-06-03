@@ -44,8 +44,8 @@ const Header = (props: IHeaderProps) => {
     document.querySelector('html').setAttribute('dir', isRTL(langKey) ? 'rtl' : 'ltr');
   };
   const toggleMenu = () => setMenuOpen(!menuOpen);
-  const marginLeft = open ? '15rem' : '6rem';
-  const marginRight = open ? '15rem' : '6rem';
+  const marginLeft = open ? '16rem' : '6rem';
+  const marginRight = open ? '16rem' : '6rem';
   return (
     <>
       <div id="app-container" style={{ display: 'flex', height: '100vh' }}>

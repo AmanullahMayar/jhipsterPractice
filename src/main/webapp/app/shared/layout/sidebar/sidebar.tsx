@@ -50,15 +50,15 @@ const Sidebar = (props: IHeaderProps) => {
 
   return (
     <>
-      <div className={`hidden md:flex  flex-column relative ${open ? 'w-15rem' : 'w-6rem'}`}>
+      <div className={`hidden md:flex  flex-column relative ${open ? 'w-16rem' : 'w-6rem'}`}>
         <div
           id="app-sidebar-2"
           style={{ backgroundColor: '#4db6ac' }}
-          className={`flex-shrink-0 absolute lg:static left-0 top-0 z-1 surface-border select-none hidden md:flex ${open ? 'w-15rem' : 'w-6rem'}`}
+          className={`flex-shrink-0 absolute lg:static left-0 top-0 z-1 surface-border select-none hidden md:flex ${open ? 'w-16rem' : 'w-6rem'}`}
         >
           <div
             style={{ backgroundColor: '#4db6ac' }}
-            className={`flex flex-column min-h-full fixed overflow-hidden ${open ? 'w-15rem transition-duration-500' : 'w-6rem transition-duration-500'}`}
+            className={`flex flex-column min-h-full fixed overflow-hidden ${open ? 'w-16rem transition-duration-500' : 'w-6rem transition-duration-500'}`}
           >
             <div className="overflow-y-auto flex-grow-1">
               <div>
