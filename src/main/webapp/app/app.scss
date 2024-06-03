@@ -4,6 +4,7 @@
 // Import Bootstrap source files from node_modules
 @import 'bootstrap/scss/bootstrap';
 @import 'bootswatch/dist/cosmo/bootswatch';
+
 body {
   margin: 0;
 }
@@ -314,3 +315,13 @@ http://stackoverflow.com/questions/23436430/bootstrap-3-input-group-100-width */
 }
 
 /* jhipster-needle-scss-add-main JHipster will add new css style */
+a.active {
+  text-decoration: none !important;
+  background-color: #37867e !important;
+}
+a {
+  text-decoration: none !important;
+}
+.menu-hover:hover {
+  background-color: #2e6d67;
+}

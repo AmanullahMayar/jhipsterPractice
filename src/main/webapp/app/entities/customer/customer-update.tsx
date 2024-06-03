@@ -1,17 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
-import { Button, Row, Col, FormText } from 'reactstrap';
-import { isNumber, Translate, translate, ValidatedField, ValidatedForm } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React, { useEffect } from 'react';
+import { Translate, ValidatedField, ValidatedForm, translate } from 'react-jhipster';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Button, Col, FormText, Row } from 'reactstrap';
 
-import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateTime } from 'app/shared/util/date-utils';
-import { mapIdList } from 'app/shared/util/entity-utils';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
+import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateTime } from 'app/shared/util/date-utils';
 
-import { ICompany } from 'app/shared/model/company.model';
 import { getEntities as getCompanies } from 'app/entities/company/company.reducer';
-import { ICustomer } from 'app/shared/model/customer.model';
-import { getEntity, updateEntity, createEntity, reset } from './customer.reducer';
+import { createEntity, getEntity, reset, updateEntity } from './customer.reducer';
 
 export const CustomerUpdate = () => {
   const dispatch = useAppDispatch();

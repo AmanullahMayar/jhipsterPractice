@@ -1,8 +1,8 @@
-import React from 'react';
-import { DropdownItem } from 'reactstrap';
-import { NavLink as Link } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React from 'react';
+import { NavLink as Link } from 'react-router-dom';
+import { DropdownItem } from 'reactstrap';
 
 export interface IMenuItem {
   children: React.ReactNode;

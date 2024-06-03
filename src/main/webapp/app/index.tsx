@@ -3,13 +3,15 @@ import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
+import AppComponent from 'app/app';
+import setupAxiosInterceptors from 'app/config/axios-interceptor';
+import { loadIcons } from 'app/config/icon-loader';
 import getStore from 'app/config/store';
 import { registerLocale } from 'app/config/translation';
-import setupAxiosInterceptors from 'app/config/axios-interceptor';
-import { clearAuthentication } from 'app/shared/reducers/authentication';
 import ErrorBoundary from 'app/shared/error/error-boundary';
-import AppComponent from 'app/app';
-import { loadIcons } from 'app/config/icon-loader';
+import { clearAuthentication } from 'app/shared/reducers/authentication';
+import 'primeflex/primeflex.css'; // flex
+import 'primeicons/primeicons.css'; //icons
 
 const store = getStore();
 registerLocale(store);
