@@ -77,9 +77,15 @@ const CustomerQRCodeReader: React.FC = () => {
               <p>{'ID: ' + id + ', First Name: ' + firstName + ', Last Name: ' + lastName}</p>
             </div>
           )}
-          <div>
-            <h3 style={{ color: 'red', fontSize: '24px', fontWeight: 'bold' }}>{customerVerificationText}</h3>
-          </div>
+          {customerVerificationText === 'Customer Verified Successfully' ? (
+            <div>
+              <h3 style={{ color: 'green', fontSize: '24px', fontWeight: 'bold' }}>{customerVerificationText}</h3>
+            </div>
+          ) : (
+            <div>
+              <h3 style={{ color: 'red', fontSize: '24px', fontWeight: 'bold' }}>{customerVerificationText}</h3>
+            </div>
+          )}
           <Button tag={Link} id="cancel-save" data-cy="entityCreateCancelButton" to="/customer" replace color="info">
             <FontAwesomeIcon icon="arrow-left" />
             &nbsp;
