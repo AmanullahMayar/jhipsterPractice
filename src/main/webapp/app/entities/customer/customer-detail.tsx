@@ -10,7 +10,6 @@ import { getEntity } from './customer.reducer';
 import axios from 'axios';
 
 const QRCodeDivStyle = {
-  border: '1px solid black',
   padding: '15px',
   margin: '130px',
   display: 'flex',

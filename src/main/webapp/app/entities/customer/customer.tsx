@@ -104,6 +104,10 @@ export const Customer = () => {
             &nbsp;
             <Translate contentKey="testprojectApp.customer.home.createLabel">Create new Customer</Translate>
           </Link>
+          &nbsp;
+          <Link to="/customer/qrcodereader" className="btn btn-warning jh-create-entity" id="jh-create-entity" data-cy="entityCreateButton">
+            Open QR Code Reader
+          </Link>
         </div>
       </h2>
       <div className="table-responsive">

@@ -7,11 +7,13 @@ import Customer from './customer';
 import CustomerDetail from './customer-detail';
 import CustomerUpdate from './customer-update';
 import CustomerDeleteDialog from './customer-delete-dialog';
+import CustomerQRCodeReader from './customer-qrcode-reader';
 
 const CustomerRoutes = () => (
   <ErrorBoundaryRoutes>
     <Route index element={<Customer />} />
     <Route path="new" element={<CustomerUpdate />} />
+    <Route path="qrcodereader" element={<CustomerQRCodeReader />} />
     <Route path=":id">
       <Route index element={<CustomerDetail />} />
       <Route path="edit" element={<CustomerUpdate />} />
