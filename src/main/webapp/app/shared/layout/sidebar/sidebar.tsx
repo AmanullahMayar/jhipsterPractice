@@ -1,4 +1,4 @@
-import { faChevronDown, faHome, faList, faUsers } from '@fortawesome/free-solid-svg-icons';
+import { faBarcode, faChevronDown, faHome, faList, faUsers } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Ripple } from 'primereact/ripple';
@@ -37,6 +37,11 @@ const Sidebar = (props: IHeaderProps) => {
         { title: 'Company', to: '/company', icon: faUsers },
         { title: 'Customer', to: '/customer', icon: faUsers },
       ],
+    },
+    {
+      title: 'Barcode Test',
+      icon: faList,
+      subMenu: [{ title: 'Generating Barcode', to: '/GeneratBarcode', icon: faBarcode }],
     },
   ];
 

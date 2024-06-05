@@ -21,10 +21,10 @@ export const CompanyDetail = () => {
   const companyEntity = useAppSelector(state => state.company.entity);
   return (
     <Row>
-      <Col md="8">
-        <h2 data-cy="companyDetailsHeading">
-          <Translate contentKey="testprojectApp.company.detail.title">Company</Translate>
-        </h2>
+      <h2 data-cy="companyDetailsHeading">
+        <Translate contentKey="testprojectApp.company.detail.title">Company</Translate>
+      </h2>
+      <Col md="4">
         <dl className="jh-entity-details">
           <dt>
             <span id="id">
@@ -34,7 +34,7 @@ export const CompanyDetail = () => {
           <dd>{companyEntity.id}</dd>
           <dt>
             <span id="companyName">
-              <Translate contentKey="testprojectApp.company.companyName">Company Name</Translate>
+              <Translate contentKey="testprojectApp.company.companyName">Company</Translate>
             </span>
           </dt>
           <dd>{companyEntity.companyName}</dd>
@@ -44,18 +44,6 @@ export const CompanyDetail = () => {
             </span>
           </dt>
           <dd>{companyEntity.companyAddress}</dd>
-          <dt>
-            <span id="companyDescription">
-              <Translate contentKey="testprojectApp.company.companyDescription">Company Description</Translate>
-            </span>
-          </dt>
-          <dd>{companyEntity.companyDescription}</dd>
-          <dt>
-            <span id="createDate">
-              <Translate contentKey="testprojectApp.company.createDate">Create Date</Translate>
-            </span>
-          </dt>
-          <dd>{companyEntity.createDate ? <TextFormat value={companyEntity.createDate} type="date" format={APP_DATE_FORMAT} /> : null}</dd>
         </dl>
         <Button tag={Link} to="/company" replace color="info" data-cy="entityDetailsBackButton">
           <FontAwesomeIcon icon="arrow-left" />{' '}
@@ -70,6 +58,22 @@ export const CompanyDetail = () => {
             <Translate contentKey="entity.action.edit">Edit</Translate>
           </span>
         </Button>
+      </Col>
+      <Col md="4">
+        <dl className="jh-entity-details">
+          <dt>
+            <span id="companyDescription">
+              <Translate contentKey="testprojectApp.company.companyDescription">Company Description</Translate>
+            </span>
+          </dt>
+          <dd>{companyEntity.companyDescription}</dd>
+          <dt>
+            <span id="createDate">
+              <Translate contentKey="testprojectApp.company.createDate">Create Date</Translate>
+            </span>
+          </dt>
+          <dd>{companyEntity.createDate ? <TextFormat value={companyEntity.createDate} type="date" format={APP_DATE_FORMAT} /> : null}</dd>
+        </dl>
       </Col>
     </Row>
   );
