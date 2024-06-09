@@ -10,6 +10,7 @@ import PasswordResetFinish from 'app/modules/account/password-reset/finish/passw
 import Logout from 'app/modules/login/logout';
 import Home from 'app/modules/home/home';
 import BarcodeGen from './modules/barcodeGen/barcodeGen';
+import QrcodeGen from './modules/barcodeGen/qrcode';
 import EntitiesRoutes from 'app/entities/routes';
 import PrivateRoute from 'app/shared/auth/private-route';
 import ErrorBoundaryRoutes from 'app/shared/error/error-boundary-routes';
@@ -33,6 +34,7 @@ const AppRoutes = () => {
       <ErrorBoundaryRoutes>
         <Route index element={<Home />} />
         <Route path="GeneratBarcode" element={<BarcodeGen />} />
+        <Route path="qrcode" element={<QrcodeGen />} />
         <Route path="login" element={<Login />} />
         <Route path="logout" element={<Logout />} />
         <Route path="account">

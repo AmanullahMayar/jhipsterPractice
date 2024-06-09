@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import Barcode from 'react-barcode';
+import GoogleChartBarcodeGen from './googleChartBarcodeGen';
 
-const BarcodeGen: React.FC = () => {
+const QrcodeGen: React.FC = () => {
   const [text, setText] = useState<string | undefined>();
   const [barcode, setBarcode] = useState<string | undefined>();
 
@@ -25,8 +26,9 @@ const BarcodeGen: React.FC = () => {
         </button>
       </div>
       <div className="row mt-2">{barcode && <Barcode value={barcode} displayValue={false} />}</div>
+      <div className="row">{/* <GoogleChartBarcodeGen /> */}</div>
     </>
   );
 };
 
-export default BarcodeGen;
+export default QrcodeGen;
