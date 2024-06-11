@@ -96,6 +96,7 @@
     "react-redux-loading-bar": "5.0.8",
     "react-router": "6.23.0",
     "react-router-dom": "6.23.0",
+    "react-to-print": "^2.15.1",
     "react-toastify": "10.0.5",
     "react-transition-group": "4.4.5",
     "reactstrap": "9.2.2",

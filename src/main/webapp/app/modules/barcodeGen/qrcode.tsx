@@ -1,11 +1,13 @@
 import React, { useRef, useState } from 'react';
 import qrcode from 'qrcode';
 import QrScanner from 'react-qr-scanner';
+import { useReactToPrint } from 'react-to-print';
 
 const Allinone: React.FC = () => {
   const [text, setText] = useState<string>('');
   const [imageQR, setImageQR] = useState<string>('');
   const [scanedImageQr, setScanedImageQr] = useState<string>('');
+  const barcodeRef = useRef();
 
   const qrRef = useRef<any>(null);
   const [fileResult, setFileResult] = useState<any>();
@@ -39,6 +41,10 @@ const Allinone: React.FC = () => {
     }
   };
 
+  const handlePrint = useReactToPrint({
+    content: () => barcodeRef.current,
+  });
+
   return (
     <div className="container mx-auto mt-2">
       <div className="row">
@@ -58,8 +64,13 @@ const Allinone: React.FC = () => {
           <div className="card-header m-1 rounded text-center">
             <h3 className="">QR Code Image</h3>
           </div>
-          <div className="card-body text-center">
+          <div className="card-body text-center" ref={barcodeRef}>
             <img src={imageQR} width="70%" alt="qr code pic is here" />
+          </div>
+          <div className="card-footer rounded mb-1 text-center">
+            <button className="col-sm-12 btn btn-primary m-2 mt-1 mb-1" onClick={handlePrint}>
+              Print QrCode
+            </button>
           </div>
         </div>
         <div className="card col-sm-4">
