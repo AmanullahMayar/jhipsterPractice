@@ -63,7 +63,7 @@ const Sidebar = (props: IHeaderProps) => {
         >
           <div
             style={{ backgroundColor: '#4db6ac' }}
-            className={`flex flex-column min-h-full fixed overflow-hidden ${open ? 'w-16rem transition-duration-500' : 'w-6rem transition-duration-500'}`}
+            className={`flex flex-column min-h-full fixed overflow-hidden ${open ? 'w-16rem transition-duration-200' : 'w-6rem transition-duration-500'}`}
           >
             <div className="overflow-y-auto flex-grow-1">
               <div>
@@ -81,21 +81,22 @@ const Sidebar = (props: IHeaderProps) => {
                         >
                           <div>
                             <FontAwesomeIcon icon={menuItem.icon} className="text-900 mr-2 ml-2" />
-                            <span className={`font-medium text-900 ${!open && 'hidden'}`}>{menuItem.title}</span>
+                            <span className={`font-medium text-900  ${!open && 'hidden'}`}>{menuItem.title}</span>
                           </div>
                           <FontAwesomeIcon
                             icon={faChevronDown}
-                            className={`text-900 ${openSubMenuIndex === index && 'rotate-180 transition-duration-500'}`}
+                            className={`text-900  ${openSubMenuIndex === index && 'rotate-180 transition-duration-500'}`}
                           />
                           <Ripple />
                         </div>
                         {openSubMenuIndex === index && (
-                          <ul className="list-none p-0" style={{ backgroundColor: '#45a59b' }}>
+                          <ul className="list-none p-0" style={{ backgroundColor: 'rgb(99 175 175)' }}>
                             {menuItem.subMenu.map((subItem, subIndex) => (
                               <li key={subIndex}>
                                 <NavLink
                                   to={subItem.to}
-                                  className="p-ripple menu-hover flex align-items-center cursor-pointer p-3 border-round text-700  transition-duration-150 transition-colors w-full no-underline"
+                                  // sub menue content
+                                  className="p-ripple menu-hover flex p-3"
                                 >
                                   <FontAwesomeIcon icon={subItem.icon} className="mr-2 ml-2 text-900" />
                                   <span className={`font-medium text-900 ${!open && 'hidden'}`}>{subItem.title}</span>
@@ -107,10 +108,7 @@ const Sidebar = (props: IHeaderProps) => {
                         )}
                       </div>
                     ) : (
-                      <NavLink
-                        to={menuItem.to}
-                        className="p-ripple menu-hover flex align-items-center cursor-pointer p-3 border-round text-700 transition-duration-150 transition-colors w-full no-underline"
-                      >
+                      <NavLink to={menuItem.to} className="p-ripple menu-hover flex p-3">
                         <FontAwesomeIcon icon={menuItem.icon} className="text-900 mr-2 ml-2" />
                         <span className={`font-medium text-900 ${!open && 'hidden'}`}>{menuItem.title}</span>
                         <Ripple />
@@ -141,7 +139,7 @@ const Sidebar = (props: IHeaderProps) => {
                   <li className="mb-2">
                     <div
                       onClick={() => handleSubMenuToggle(index)}
-                      className="d-flex align-items-center justify-content-between text-dark cursor-pointer"
+                      className="d-flex align-items-center justify-content-between text-dark cursor-pointer p-2"
                     >
                       <div>
                         <FontAwesomeIcon icon={menuItem.icon} className="me-2" />
@@ -150,12 +148,12 @@ const Sidebar = (props: IHeaderProps) => {
                       <FontAwesomeIcon icon={faChevronDown} className={`ms-auto ${openSubMenuIndex === index ? 'rotate-180' : ''}`} />
                     </div>
                     {openSubMenuIndex === index && (
-                      <ul className="list-unstyled ps-3">
+                      <ul className="list-unstyled" style={{ backgroundColor: 'rgb(99 175 175)' }}>
                         {menuItem.subMenu.map((subItem, subIndex) => (
-                          <li key={subIndex}>
-                            <NavLink to={subItem.to} className="d-flex align-items-center text-dark text-decoration-none py-2">
-                              <FontAwesomeIcon icon={subItem.icon} className="me-2" />
-                              <span>{subItem.title}</span>
+                          <li key={subIndex} className="" style={{ backgroundColor: '' }}>
+                            <NavLink to={subItem.to} className="d-flex align-items-center text-decoration-none p-2  border-round">
+                              <FontAwesomeIcon icon={subItem.icon} className="p-2" />
+                              <span className={`font-medium text-900`}>{subItem.title}</span>
                             </NavLink>
                           </li>
                         ))}
@@ -164,8 +162,8 @@ const Sidebar = (props: IHeaderProps) => {
                   </li>
                 ) : (
                   <li>
-                    <NavLink to={menuItem.to} className="d-flex align-items-center text-dark text-decoration-none py-2">
-                      <FontAwesomeIcon icon={menuItem.icon} className="me-2" />
+                    <NavLink to={menuItem.to} className="d-flex align-items-center  text-decoration-none py-2 p-1 border-round">
+                      <FontAwesomeIcon icon={menuItem.icon} className="me-2 " />
                       <span>{menuItem.title}</span>
                     </NavLink>
                   </li>
