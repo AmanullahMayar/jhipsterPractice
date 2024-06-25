@@ -1,5 +1,8 @@
 import { faBarcode, faChevronDown, faHome, faList, faQrcode, faUsers } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { AUTHORITIES } from 'app/config/constants';
+import { useAppSelector } from 'app/config/store';
+import { hasAnyAuthority } from 'app/shared/auth/private-route';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Ripple } from 'primereact/ripple';
 import React, { useState } from 'react';
@@ -18,17 +21,18 @@ const Sidebar = (props: IHeaderProps) => {
   const menuOpen = props.menuOpen;
   const setMenuOpen = props.setMenuOpen;
   const [openSubMenuIndex, setOpenSubMenuIndex] = useState<number | null>(null);
+  const isAdmin = useAppSelector(state => hasAnyAuthority(state.authentication.account.authorities, [AUTHORITIES.ADMIN]));
 
   const menuItems = [
     { title: translate('global.menu.home'), icon: faHome, to: '/' },
-    {
+    isAdmin && {
       title: translate('global.menu.admin.main'),
       icon: faUsers,
       subMenu: [
         { title: translate('global.menu.admin.userManagement'), to: '/admin/user-management', icon: faUsers },
         { title: translate('global.menu.admin.metrics'), to: '/admin/metrics', icon: faUsers },
         { title: translate('global.menu.admin.health'), to: '/admin/health', icon: faUsers },
-      ],
+      ].filter(Boolean), // filter out falsy values (null)
     },
     {
       title: translate('global.menu.entities.main'),
@@ -46,7 +50,7 @@ const Sidebar = (props: IHeaderProps) => {
         { title: 'Generating/Scanning QR Code', to: '/qrcode', icon: faQrcode },
       ],
     },
-  ];
+  ].filter(Boolean); // Filter out the falsy values (null)
 
   const handleSubMenuToggle = (index: number) => {
     setOpenSubMenuIndex(openSubMenuIndex === index ? null : index);
@@ -55,7 +59,6 @@ const Sidebar = (props: IHeaderProps) => {
   const closeSidebar = () => {
     setMenuOpen(false);
   };
-
   return (
     <>
       <div className={`hidden md:flex  flex-column relative ${open ? 'w-16rem' : 'w-6rem'}`}>

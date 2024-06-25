@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent, FormEvent } from 'react';
+import React, { FormEvent, useState } from 'react';
 
 const GoogleChartBarcodeGen: React.FC = () => {
   const [value, setValue] = useState<string>('');

@@ -1,5 +1,5 @@
-import React, { useRef, useState } from 'react';
 import qrcode from 'qrcode';
+import React, { useRef, useState } from 'react';
 import QrScanner from 'react-qr-scanner';
 import { useReactToPrint } from 'react-to-print';
 
